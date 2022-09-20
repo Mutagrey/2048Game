@@ -14,7 +14,7 @@ struct CellView: View {
     var body: some View {
         ZStack{
             // Main Color
-            numverColor(cell.number)
+            Color.theme.cellColor(number: cell.number)
                 .clipShape(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
             
             // GlassMorphic Card
@@ -56,11 +56,6 @@ struct CellView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .scaleEffect(cell.number > 0 ? 1 : 0)
         .opacity(cell.number > 0 ? 1 : 0)
-    }
-    // Get number Color
-    func numverColor(_ number: Int) -> Color {
-        let color = Color("CellColor\(number)")
-        return color == .white ? Color("CellColor2") : Color("CellColor\(number)")
     }
 }
 

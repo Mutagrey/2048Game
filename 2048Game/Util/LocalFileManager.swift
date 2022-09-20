@@ -8,6 +8,7 @@
 import SwiftUI
 import Combine
 
+/// Class to manage Local files (JSON etc)
 class LocalFileManager {
     /// Root URL  for `SearchPathDirectory` in `userDomainMask`
     static let rootURL: URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
