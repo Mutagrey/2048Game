@@ -9,11 +9,10 @@ import SwiftUI
 
 @main
 struct _048GameApp: App {
-//    @StateObject var vm = GameViewModel()
-    @StateObject var vm: GameViewModel2
     
+    @StateObject var vm: GameViewModel
     init() {
-        _vm = StateObject(wrappedValue: GameViewModel2(dependencies: Dependences()))
+        _vm = StateObject(wrappedValue: GameViewModel(managers: GameManagers()))
     }
     
     var body: some Scene {

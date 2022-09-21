@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct GameGridView: View {
-    @EnvironmentObject var vm: GameViewModel2
+    @EnvironmentObject var vm: GameViewModel
     @State private var isMoving = false
     private let distanceSence: CGFloat = 50
     var body: some View {
@@ -90,6 +90,6 @@ struct GameGridView: View {
 struct GameGridView_Previews: PreviewProvider {
     static var previews: some View {
         Home()
-            .environmentObject(GameViewModel2(dependencies: Dependences()))
+            .environmentObject(GameViewModel(managers: GameManagers()))
     }
 }

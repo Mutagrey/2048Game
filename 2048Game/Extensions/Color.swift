@@ -9,6 +9,9 @@ import SwiftUI
 
 extension Color {
     static let theme = ColorTheme()
+    static func cellColor(number: Int)->Color{
+        return number > 0 && number % 2 == 0 ? Color("CellColor\(number)") : Color.clear
+    }
 }
 
 struct ColorTheme {
@@ -19,9 +22,4 @@ struct ColorTheme {
     ], startPoint: .top, endPoint: .bottom)
     let gridColor = Color("GridColor")
     let cellBackColor = Color("CellBackColor")
-    
-    func cellColor(number: Int)->Color{
-        let color = Color("CellColor\(number)")
-        return color == .white ? Color("CellColor2") : Color("CellColor\(number)")
-    }
 }

@@ -9,7 +9,7 @@ import SwiftUI
 import Charts
 
 struct StatsView: View {
-    @EnvironmentObject var vm: GameViewModel2
+    @EnvironmentObject var vm: GameViewModel
     var body: some View {
         Chart{
             ForEach(0..<vm.movesArray.count, id: \.self) { id in
@@ -59,6 +59,6 @@ struct StatsView: View {
 struct StatsView_Previews: PreviewProvider {
     static var previews: some View {
         StatsView()
-            .environmentObject(GameViewModel2(dependencies: Dependences()))
+            .environmentObject(GameViewModel(managers: GameManagers()))
     }
 }

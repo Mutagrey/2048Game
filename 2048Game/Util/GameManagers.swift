@@ -7,8 +7,8 @@
 
 import Foundation
 
-class Dependences {
-//    let localFileManger = LocalFileManager()
+/// GameManagers
+class GameManagers {
     let gameEngine = GameEngine()
     let cellsDataManager = CellsDataManager()
 }

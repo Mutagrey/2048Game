@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct Home: View {
-    @EnvironmentObject var vm: GameViewModel2
+    @EnvironmentObject var vm: GameViewModel
     @Environment(\.scenePhase) var scenePhase
 
     var body: some View {
@@ -17,7 +17,7 @@ struct Home: View {
             midMenu
             GameGridView()
             botMenu
-            StatsView()
+//            StatsView()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding()
@@ -25,7 +25,7 @@ struct Home: View {
             Color.theme.backgroundGradient
                 .ignoresSafeArea()
         }
-        .overlay { gameOver }
+        .overlay { if vm.isGameOver { gameOver } }
         .onChange(of: scenePhase) { newValue in
             if newValue == .background || newValue == .inactive {
                 vm.saveCells()
@@ -56,7 +56,7 @@ struct Home: View {
                     .font(.title3)
                     .fontWeight(.bold)
                 Spacer(minLength: 0)
-                Text("\(vm.score.formatUsingAbbrevation())")
+                Text("\(vm.managers.gameEngine.score.formatUsingAbbrevation())")
                     .font(.title)
                     .fontWeight(.heavy)
                 Spacer(minLength: 0)
@@ -150,7 +150,7 @@ struct Home: View {
                 }
                 .padding(.horizontal)
                 .padding(.bottom)
-                .opacity(vm.bestScore == vm.score  ? 1 : 0)
+                .opacity(vm.bestScore == vm.score && vm.score > 0  ? 1 : 0)
 
             
             Stepper("Rank: \(vm.rank)") {
@@ -172,29 +172,28 @@ struct Home: View {
         ZStack{
             Color.black.opacity(0.75)
                 .ignoresSafeArea()
+            
             VStack{
                 Text("Game Over")
+                    .foregroundColor(Color.red.opacity(0.9))
                     .multilineTextAlignment(.center)
                     .font(.title.bold())
                     .padding()
                 Text("Score")
                     .font(.title.bold())
-                Text("\(vm.score.formatUsingAbbrevation())")
+                    .foregroundColor(Color.white.opacity(0.7))
+                Text("\(vm.score)")
                     .font(.title.bold())
-                    .foregroundColor(.indigo)
+                    .foregroundColor(.purple)
                     .padding(.vertical)
                     .padding(.bottom)
-                    
             }
-            .foregroundColor(Color.red.opacity(0.7))
-            .transition(.scale)
-            .clipShape(RoundedRectangle(cornerRadius: 10))
             .background{
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(Color("GridColor"))
+                Color.theme.backgroundGradient
             }
+            .clipShape(RoundedRectangle(cornerRadius: 10))
         }
-        .opacity(vm.isGameOver ? 1 : 0)
+        .transition(.scale)
         .animation(.spring(), value: vm.isGameOver)
         .onTapGesture {
             vm.resetGame()
@@ -206,6 +205,6 @@ struct Home: View {
 struct Home_Previews: PreviewProvider {
     static var previews: some View {
         Home()
-            .environmentObject(GameViewModel2(dependencies: Dependences()))
+            .environmentObject(GameViewModel(managers: GameManagers()))
     }
 }
