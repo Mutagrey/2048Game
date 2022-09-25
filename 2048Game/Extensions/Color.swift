@@ -20,6 +20,9 @@ struct ColorTheme {
         .brown.opacity(0.2),
         .brown.opacity(0.5),
     ], startPoint: .top, endPoint: .bottom)
+    let cardGradiend = LinearGradient(colors: [Color("CellColor32"), Color(uiColor: .systemYellow).opacity(0.7)], startPoint: .topLeading, endPoint: .bottomTrailing)
     let gridColor = Color("GridColor")
     let cellBackColor = Color("CellBackColor")
+    let textColor = Color("TextColor")
+    let accentColor = Color("GameAccentColor")
 }

@@ -48,7 +48,7 @@ struct CellView: View {
                 .font(.system(size: 30, weight: .bold, design: .monospaced))
                 .minimumScaleFactor(0.01)
                 .lineLimit(1)
-                .foregroundColor(cell.number > 4 ? Color.white : Color("TextColor"))
+                .foregroundColor(cell.number > 4 ? Color.white : Color.theme.textColor)
                 .shadow(color: .black.opacity(0.2), radius: 5, x: 5, y: 5)
 //                .animation(.easeInOut(duration: 0.5), value: cell.number == 0 )
                 .transition(.scale)

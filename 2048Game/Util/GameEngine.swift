@@ -182,4 +182,13 @@ class GameEngine: ObservableObject {
         return isSum
     }
 
+    /// Get Row by Cells Index
+    func getRow(index: Int) -> Int {
+        return Int(Double(index) / Double(rank))
+    }
+    
+    /// Get Column by Cells Index
+    func getColumn(index: Int) -> Int {
+        return index % rank
+    }
 }

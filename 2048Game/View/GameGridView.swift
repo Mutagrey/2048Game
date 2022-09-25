@@ -24,7 +24,7 @@ struct GameGridView: View {
                 .onChanged{ value in
                     let dx = value.translation.width
                     let dy = value.translation.height
-                    withAnimation(.easeInOut(duration: 0.12)) {
+                    withAnimation(.easeInOut(duration: 0.15)) {
                         if abs(dx) > abs(dy) {
                             if dx < -distanceSence && !isMoving {
                                 isMoving = true

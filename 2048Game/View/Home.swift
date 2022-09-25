@@ -16,11 +16,14 @@ struct Home: View {
             topMenu
             midMenu
             GameGridView()
-            botMenu
-//            StatsView()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding()
+        .blur(radius: vm.isGameOver ? 10 : 0)
+        .animation(.easeInOut, value: vm.isGameOver)
+        .overlay(alignment: .bottom){
+            botMenu
+        }
         .background{
             Color.theme.backgroundGradient
                 .ignoresSafeArea()
@@ -33,74 +36,35 @@ struct Home: View {
         }
     }
     
+    @ViewBuilder
+    private func InfoCard(title: String, subTitle: String?, titleFont: Font = .title)-> some View{
+        VStack(spacing: 12){
+            Text(title)
+                .font(titleFont)
+                .fontWeight(.heavy)
+                .foregroundColor(.white.opacity(0.9))
+                .shadow(color: .black.opacity(0.15), radius: 10, x: 5, y: 5)
+           
+            if let subTitle = subTitle {
+                Text(subTitle)
+                    .font(.title2)
+                    .fontWeight(.heavy)
+                    .foregroundColor(.indigo)
+                    .shadow(color: .black.opacity(0.15), radius: 10, x: 5, y: 5)
+            }
+        }
+        .frame(width: 100, height: 100)
+        .background{ Color.theme.cardGradiend }
+        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+        .shadow(radius: 10, x: 5, y: 5)
+    }
+    
     var topMenu: some View {
         HStack{
-            // icon label
-            VStack{
-                Text("2048")
-                    .font(.title)
-                    .fontWeight(.heavy)
-                    .foregroundColor(.white.opacity(0.9))
-            }
-            .frame(width: 100, height: 100)
-            .blendMode(.overlay)
-            .background{
-                LinearGradient(colors: [.purple.opacity(0.4), .indigo.opacity(0.5)], startPoint: .topLeading, endPoint: .bottomTrailing)
-            }
-            .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
-            .shadow(radius: 5)
+            InfoCard(title: "2048", subTitle: nil)
             Spacer()
-            // score
-            VStack{
-                Text("Score")
-                    .font(.title3)
-                    .fontWeight(.bold)
-                Spacer(minLength: 0)
-                Text("\(vm.managers.gameEngine.score.formatUsingAbbrevation())")
-                    .font(.title)
-                    .fontWeight(.heavy)
-                Spacer(minLength: 0)
-            }
-            .foregroundColor(.white.opacity(0.8))
-            .padding(5)
-            .blendMode(.overlay)
-            .minimumScaleFactor(0.2)
-            .lineLimit(1)
-            .frame(width: 100, height: 100)
-            .background{
-                LinearGradient(colors: [.purple.opacity(0.4), .indigo.opacity(0.5)], startPoint: .topLeading, endPoint: .bottomTrailing)
-            }
-            
-            .clipShape(RoundedRectangle(cornerRadius: 5))
-            .shadow(radius: 5)
-//            .background{
-//
-//                RoundedRectangle(cornerRadius: 10)
-//                    .fill(Color("CellBackColor"))
-//                    .shadow(radius: 5)
-//            }
-            // best
-            VStack{
-                Text("Best")
-                    .font(.title3)
-                    .fontWeight(.bold)
-                Spacer(minLength: 0)
-                Text("\(vm.bestScore.formatUsingAbbrevation())")
-                    .font(.title)
-                    .fontWeight(.heavy)
-                Spacer(minLength: 0)
-            }
-            .foregroundColor(.white.opacity(0.8))
-            .padding(5)
-            .blendMode(.overlay)
-            .minimumScaleFactor(0.2)
-            .lineLimit(1)
-            .frame(width: 100, height: 100)
-            .background{
-                LinearGradient(colors: [.purple.opacity(0.4), .indigo.opacity(0.5)], startPoint: .topLeading, endPoint: .bottomTrailing)
-            }
-            .clipShape(RoundedRectangle(cornerRadius: 5))
-            .shadow(radius: 5)
+            InfoCard(title: "Score", subTitle: vm.managers.gameEngine.score.formatUsingAbbrevation(), titleFont: .title2)
+            InfoCard(title: "Best", subTitle: vm.bestScore.formatUsingAbbrevation(), titleFont: .title2)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
@@ -114,47 +78,51 @@ struct Home: View {
                     }
                 } label: {
                     Text("New Game!")
-                        .foregroundColor(Color("TextColor"))
+                        .foregroundColor(Color.theme.textColor)
                         .font(.headline)
                         .frame(maxWidth: .infinity)
                         .padding(5)
                 }
                 .buttonStyle(.borderedProminent)
-                .accentColor(.yellow)
+                .accentColor(Color.theme.accentColor)
+                .shadow(radius: 10, x: 5, y: 5)
                 Button {
                     withAnimation(.spring()){
                         vm.bestScore = 0
+                        vm.managers.gameEngine.bestScore = 0
                     }
                 } label: {
                     Image(systemName: "gobackward")
-                        .foregroundColor(Color("TextColor"))
+                        .foregroundColor(Color.theme.textColor)
                         .padding(5)
                 }
                 .buttonStyle(.borderedProminent)
-                .accentColor(.yellow)
+                .accentColor(Color.theme.accentColor)
+                .shadow(radius: 10, x: 5, y: 5)
             }
             Text("Join the numbers and get to the 2048 tile!")
-                .foregroundColor(Color("TextColor"))
+                .foregroundColor(Color.theme.textColor)
                 .font(.headline)
         }
     }
     
     var botMenu: some View {
-        VStack(spacing: 0.0){
+        VStack(spacing: 10.0){
                 Group {
-                    Text("Record!")
+                    Text("Hight Score!")
                         .font(.title2.bold())
+                        .foregroundColor(.indigo)
                     Text("\(vm.bestScore)")
                         .font(.title.bold())
-                        .foregroundColor(.red)
+                        .foregroundColor(.indigo)
+                        .minimumScaleFactor(0.1)
                 }
                 .padding(.horizontal)
-                .padding(.bottom)
+//                .padding(.bottom)
                 .opacity(vm.bestScore == vm.score && vm.score > 0  ? 1 : 0)
 
-            
             Stepper("Rank: \(vm.rank)") {
-                if vm.rank < 10 {
+                if vm.rank < 6 {
                     vm.rank += 1
                     vm.resetGame()
                 }
@@ -164,39 +132,38 @@ struct Home: View {
                     vm.resetGame()
                 }
             }
+            .foregroundColor( Color.theme.textColor)
 
         }
+        .padding()
     }
     
     var gameOver: some View{
         ZStack{
-            Color.black.opacity(0.75)
+            
+            Color.black.opacity(0.6)
                 .ignoresSafeArea()
             
-            VStack{
+            VStack(spacing: 20){
                 Text("Game Over")
-                    .foregroundColor(Color.red.opacity(0.9))
-                    .multilineTextAlignment(.center)
+                    .foregroundColor(Color.red.opacity(0.7))
                     .font(.title.bold())
-                    .padding()
                 Text("Score")
-                    .font(.title.bold())
+                    .font(.title2.bold())
                     .foregroundColor(Color.white.opacity(0.7))
                 Text("\(vm.score)")
                     .font(.title.bold())
-                    .foregroundColor(.purple)
-                    .padding(.vertical)
-                    .padding(.bottom)
+                    .foregroundColor(.indigo)
             }
-            .background{
-                Color.theme.backgroundGradient
-            }
-            .clipShape(RoundedRectangle(cornerRadius: 10))
+            .padding()
+            .background(.ultraThinMaterial.opacity(0.7), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+            .shadow(radius: 10)
         }
-        .transition(.scale)
-        .animation(.spring(), value: vm.isGameOver)
+        .transition(.opacity)
         .onTapGesture {
-            vm.resetGame()
+            withAnimation(.easeInOut) {
+                vm.resetGame()
+            }
         }
     }
 }

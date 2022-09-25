@@ -54,6 +54,10 @@ class GameViewModel: ObservableObject {
                     self.isGameOver = isGameOver
             }
             .store(in: &cancelables)
+        
+        if self.cells.isEmpty {
+            managers.gameEngine.resetGame()
+        }
     }
     
     /// Move cells to direction

@@ -21,6 +21,9 @@
 		418A073528DA1F6C003C92FF /* GameManagers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418A073428DA1F6C003C92FF /* GameManagers.swift */; };
 		418A073728DA2169003C92FF /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418A073628DA2169003C92FF /* GameViewModel.swift */; };
 		418A073928DA52AD003C92FF /* CellsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418A073828DA52AD003C92FF /* CellsDataManager.swift */; };
+		418A073B28DCDF17003C92FF /* GameCanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418A073A28DCDF17003C92FF /* GameCanvasView.swift */; };
+		418A075E28DF0C07003C92FF /* README.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 418A075D28DF0C07003C92FF /* README.rtf */; };
+		418A076028DF9389003C92FF /* MetaGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418A075F28DF9389003C92FF /* MetaGridView.swift */; };
 		41C3627B28CCE69F0040804B /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3627A28CCE69F0040804B /* CellView.swift */; };
 		41CCCB6C28D1453E0081AF19 /* LocalFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CCCB6B28D1453E0081AF19 /* LocalFileManager.swift */; };
 /* End PBXBuildFile section */
@@ -41,6 +44,9 @@
 		418A073428DA1F6C003C92FF /* GameManagers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManagers.swift; sourceTree = "<group>"; };
 		418A073628DA2169003C92FF /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
 		418A073828DA52AD003C92FF /* CellsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellsDataManager.swift; sourceTree = "<group>"; };
+		418A073A28DCDF17003C92FF /* GameCanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCanvasView.swift; sourceTree = "<group>"; };
+		418A075D28DF0C07003C92FF /* README.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = README.rtf; sourceTree = "<group>"; };
+		418A075F28DF9389003C92FF /* MetaGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaGridView.swift; sourceTree = "<group>"; };
 		41C3627A28CCE69F0040804B /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
 		41CCCB6B28D1453E0081AF19 /* LocalFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalFileManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -84,6 +90,7 @@
 				41452D0928CCDBE800290675 /* ContentView.swift */,
 				41452D0B28CCDBE900290675 /* Assets.xcassets */,
 				41452D0D28CCDBE900290675 /* Preview Content */,
+				418A075D28DF0C07003C92FF /* README.rtf */,
 			);
 			path = 2048Game;
 			sourceTree = "<group>";
@@ -111,6 +118,8 @@
 				41C3627A28CCE69F0040804B /* CellView.swift */,
 				418A073028D8DD90003C92FF /* GameGridView.swift */,
 				418A073228D8E3AA003C92FF /* StatsView.swift */,
+				418A073A28DCDF17003C92FF /* GameCanvasView.swift */,
+				418A075F28DF9389003C92FF /* MetaGridView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -202,6 +211,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				41452D0F28CCDBE900290675 /* Preview Assets.xcassets in Resources */,
+				418A075E28DF0C07003C92FF /* README.rtf in Resources */,
 				41452D0C28CCDBE900290675 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -213,6 +223,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				418A073B28DCDF17003C92FF /* GameCanvasView.swift in Sources */,
 				418A072F28D78ED5003C92FF /* GameEngine.swift in Sources */,
 				418A073728DA2169003C92FF /* GameViewModel.swift in Sources */,
 				41452D0A28CCDBE800290675 /* ContentView.swift in Sources */,
@@ -227,6 +238,7 @@
 				418A073328D8E3AA003C92FF /* StatsView.swift in Sources */,
 				41452D1828CCDC1E00290675 /* Home.swift in Sources */,
 				41452D0828CCDBE800290675 /* _048GameApp.swift in Sources */,
+				418A076028DF9389003C92FF /* MetaGridView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,6 +370,8 @@
 				DEVELOPMENT_TEAM = 6AZ8WMLP5K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = 2048;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -388,6 +402,8 @@
 				DEVELOPMENT_TEAM = 6AZ8WMLP5K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = 2048;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
