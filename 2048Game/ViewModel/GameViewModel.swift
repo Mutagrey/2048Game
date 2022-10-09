@@ -10,70 +10,60 @@ import Combine
 
 class GameViewModel: ObservableObject {
     
-    @Published var cells: [Cell] = []
-    @Published var movesArray: [Int] = []
-    @Published var scoreArray: [Int] = []
+    @Published private var game: GameEngine = GameEngine(rank: 4)
     
-    @AppStorage("moves") var moves: Int = 0
-    @AppStorage("score") var score: Int = 0
-    @AppStorage("bestScore") var bestScore: Int = 0
-    @AppStorage("bestMoves") var bestMoves: Int = 0
-    @AppStorage("rank") var rank: Int = 4
-    
-    @Published var isGameOver: Bool = false
+    var cells: [Cell] { game.cells }
+    var moves: Int { game.moves }
+    var score: Int { game.score }
+    var bestScore: Int { game.bestScore }
+    var bestMoves: Int { game.bestMoves }
+    var isGameOver: Bool { game.isGameOver }
+    var rank: Int { game.rank }
     
     private var cancelables = Set<AnyCancellable>()
-    let managers: GameManagers
+    private let dataStore = GameDataManager()
     
-    init(managers: GameManagers) {
-        self.managers = managers
-        addSubscribers()
+    init() {
+        loadGame()
     }
     
-    private func addSubscribers(){
-        
-        managers.cellsDataManager.$cells
-            .dropFirst() // need to avoid empty cells array
-            .sink{ [weak self] cells in
-                guard let self = self else { return }
-                    self.managers.gameEngine.cells = cells
+    // Load saved game
+    private func loadGame(){
+        dataStore.$game
+            .sink{ [weak self] game in
+                guard
+                    let self = self,
+                    let game = game
+                else { return }
+                self.game = game
             }
             .store(in: &cancelables)
-        
-        managers.gameEngine.$cells
-            .dropFirst() // need to avoid empty cells array
-            .sink { [weak self] cells in
-                guard let self = self else { return }
-                self.cells = cells
-            }
-            .store(in: &cancelables)
-        
-        managers.gameEngine.$isGameOver
-            .sink{ [weak self] isGameOver in
-                guard let self = self else { return }
-                    self.isGameOver = isGameOver
-            }
-            .store(in: &cancelables)
-        
-        if self.cells.isEmpty {
-            managers.gameEngine.resetGame()
-        }
     }
     
-    /// Move cells to direction
-    func moveCell(to move: GameEngine.Direction) {
-        managers.gameEngine.moveCell(to: move)
-    }
-    
-    /// Reset Game
-    func resetGame() {
-        managers.gameEngine.resetGame()
-    }
-    
-    /// Save Cells to local folder
+    // Save game to local folder
     func saveCells() {
-        self.managers.cellsDataManager.cells = cells
-        self.managers.cellsDataManager.saveCells()
+        self.dataStore.saveCells(game: game)
+    }
+    
+    // Move cells to direction
+    func moveCell(to move: GameEngine.Direction) {
+        game.moveCell(to: move)
+    }
+    
+    // Reset Game
+    func resetGame(rank: Int) {
+        game.createNewGame(rank: rank)
+    }
+    
+    // Reset best scote
+    func resetBestScore() {
+        game.resetBestScore()
+    }
+    
+    // Animate Cell when sum
+    func animateCell(_ cell: Cell) {
+        guard let index = cells.firstIndex(of: cell) else { return }
+        game.animateCell(index: index)
     }
 }
 

@@ -1,5 +1,5 @@
 //
-//  CellsDataManager.swift
+//  GameDataManager.swift
 //  2048Game
 //
 //  Created by Sergey Petrov on 20.09.2022.
@@ -8,9 +8,9 @@
 import SwiftUI
 import Combine
 
-class CellsDataManager {
+class GameDataManager {
     
-    @Published var cells: [Cell] = []
+    @Published private(set) var game: GameEngine?
     private var cancelables = Set<AnyCancellable>()
     
     init() {
@@ -19,8 +19,8 @@ class CellsDataManager {
     
     /// Load single Note from local folder and append it to `notes`.
     private func loadCellsFromLocalURL() {
-        LocalFileManager.getJSON(from: LocalFileManager.rootURL.appendingPathComponent("Cells.json"))
-            .decode(type: [Cell].self, decoder: JSONDecoder())
+        LocalFileManager.getJSON(from: LocalFileManager.rootURL.appendingPathComponent("GameData.json"))
+            .decode(type: GameEngine.self, decoder: JSONDecoder())
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
                 switch completion {
@@ -29,17 +29,16 @@ class CellsDataManager {
                 case .finished:
                     break
                 }
-            }, receiveValue: { [weak self] cells in
+            }, receiveValue: { [weak self] game in
                 guard let self = self else { return }
-                self.cells = cells //.append(cell)
+                self.game = game
             })
             .store(in: &cancelables)
     }
     
     /// Save Node to local folder
-    func saveCells() {
-        // Gets JSON URL rootURL/Cells.json
-        let jsonURL = LocalFileManager.rootURL.appendingPathComponent("Cells.json")
-        LocalFileManager.saveJSON(to: jsonURL, data: self.cells)
+    func saveCells(game: GameEngine) {
+        let jsonURL = LocalFileManager.rootURL.appendingPathComponent("GameData.json")
+        LocalFileManager.saveJSON(to: jsonURL, data: game)
     }
 }

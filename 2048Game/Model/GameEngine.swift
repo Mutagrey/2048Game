@@ -7,19 +7,17 @@
 
 import SwiftUI
 
-class GameEngine: ObservableObject {
+struct GameEngine: Codable {
 
-    @Published var cells: [Cell] = []
-    @Published var movesArray: [Int] = []
-    @Published var scoreArray: [Int] = []
+    private static let startNumbers = [2, 2, 4]
     
-    @AppStorage("moves") var moves: Int = 0
-    @AppStorage("score") var score: Int = 0
-    @AppStorage("bestScore") var bestScore: Int = 0
-    @AppStorage("bestMoves") var bestMoves: Int = 0
-    @AppStorage("rank") var rank: Int = 4
-    
-    @Published var isGameOver: Bool = false
+    private(set) var cells: [Cell] = []
+    private(set) var moves: Int = 0
+    private(set) var score: Int = 0
+    private(set) var bestScore: Int = 0
+    private(set) var bestMoves: Int = 0
+    private(set) var rank: Int = 4
+    private(set) var isGameOver: Bool = false
     
     enum Direction {
         case up
@@ -28,44 +26,55 @@ class GameEngine: ObservableObject {
         case right
     }
 
-    /// Reset Game
-    func resetGame(){
+    init(rank: Int){
+        createNewGame(rank: rank)
+    }
+    
+    // Reset Game
+    mutating func createNewGame(rank: Int){
+        self.rank = rank
         moves = 0
-        movesArray.removeAll()
         score = 0
-        scoreArray.removeAll()
-        cells.removeAll()
+        cells = []
         isGameOver = false
         for _ in (0..<rank*rank){
             cells.append(.init())
         }
         cells[(0..<rank*rank).randomElement()!].number = 2
-        cells[(0..<rank*rank).randomElement()!].number = [2, 2, 4].randomElement()!
+        cells[(0..<rank*rank).randomElement()!].number = GameEngine.startNumbers.randomElement()!
     }
-
-    /// Add new Cell
-    func addNewCell() {
-        guard
-            let cellID = cells.filter({$0.number == 0}).randomElement()?.id,
-            let index = cells.firstIndex(where: {$0.id == cellID})
-        else { return }
-        cells[index].number = [2, 4].randomElement()!
+    
+    // Reset game best score
+    mutating func resetBestScore() {
+        bestScore = 0
+        bestMoves = 0
     }
 
     /// Move Cell to Direction
-    func moveCell(to move: Direction) {
+    mutating func moveCell(to move: Direction) {
         let isSorted = self.sortCells(to: move)
         let isSum = self.sumCells(to: move)
         if isSorted || isSum {
             self.sortCells(to: move)    // Sort again after sum cells
             self.addNewCell()           // add new cell if we have empty cells
             self.moves += 1
-            self.movesArray.append(self.moves)
             self.isGameOver = self.checkIsGameOver()
         }
     }
     
-    func checkIsGameOver() -> Bool {
+    // MARK: - Private functions
+    
+    /// Add new Cell
+    private mutating func addNewCell() {
+        guard
+            let cell = cells.filter({$0.number == 0}).randomElement(),
+            let index = cells.firstIndex(of: cell),
+            let newNumber = GameEngine.startNumbers.randomElement()
+        else { return }
+        cells[index].number = newNumber
+    }
+    
+    private func checkIsGameOver() -> Bool {
         let zeroNums = cells.filter({$0.number == 0}).count
         for id in (0..<cells.count) {
             let curPos = id
@@ -85,15 +94,8 @@ class GameEngine: ObservableObject {
     }
     
     /// Animate Cell by index
-    private func animateCell(index: Int) {
-        DispatchQueue.main.async {
-            self.cells[index].animate = true
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                withAnimation(.easeIn(duration: 0.05)){
-                    self.cells[index].animate = false
-                }
-            }
-        }
+    mutating func animateCell(index: Int) {
+        self.cells[index].animate.toggle()
     }
     
     // MARK: Get Position by direction and selected row and column
@@ -134,7 +136,7 @@ class GameEngine: ObservableObject {
     
     /// Sort Cells by Direction
     @discardableResult
-    private func sortCells(to move: Direction) -> Bool {
+    private mutating func sortCells(to move: Direction) -> Bool {
         var isSorted = false
         for row in (0..<rank){
             var zeroCount = 0
@@ -158,7 +160,7 @@ class GameEngine: ObservableObject {
 
     /// Sum Cells
     @discardableResult
-    private func sumCells(to move: Direction) -> Bool {
+    private mutating func sumCells(to move: Direction) -> Bool {
         var isSum = false
         for row in (0..<rank){
             for column in (0..<rank) {
@@ -178,17 +180,16 @@ class GameEngine: ObservableObject {
                 }
             }
         }
-        scoreArray.append(score)
         return isSum
     }
 
     /// Get Row by Cells Index
-    func getRow(index: Int) -> Int {
+    private func getRow(index: Int) -> Int {
         return Int(Double(index) / Double(rank))
     }
     
     /// Get Column by Cells Index
-    func getColumn(index: Int) -> Int {
+    private func getColumn(index: Int) -> Int {
         return index % rank
     }
 }

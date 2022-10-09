@@ -1,5 +1,5 @@
 //
-//  Home.swift
+//  MainGameView.swift
 //  2048Game
 //
 //  Created by Sergey Petrov on 10.09.2022.
@@ -7,15 +7,18 @@
 
 import SwiftUI
 
-struct Home: View {
+struct MainGameView: View {
     @EnvironmentObject var vm: GameViewModel
     @Environment(\.scenePhase) var scenePhase
-
+    @AppStorage("rank") private var rank: Int = 4
+    
     var body: some View {
         VStack(spacing: 20){
             topMenu
             midMenu
             GameGridView()
+            Spacer(minLength: 0)
+            Spacer()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding()
@@ -36,46 +39,21 @@ struct Home: View {
         }
     }
     
-    @ViewBuilder
-    private func InfoCard(title: String, subTitle: String?, titleFont: Font = .title)-> some View{
-        VStack(spacing: 12){
-            Text(title)
-                .font(titleFont)
-                .fontWeight(.heavy)
-                .foregroundColor(.white.opacity(0.9))
-                .shadow(color: .black.opacity(0.15), radius: 10, x: 5, y: 5)
-           
-            if let subTitle = subTitle {
-                Text(subTitle)
-                    .font(.title2)
-                    .fontWeight(.heavy)
-                    .foregroundColor(.indigo)
-                    .shadow(color: .black.opacity(0.15), radius: 10, x: 5, y: 5)
-            }
-        }
-        .frame(width: 100, height: 100)
-        .background{ Color.theme.cardGradiend }
-        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-        .shadow(radius: 10, x: 5, y: 5)
-    }
-    
-    var topMenu: some View {
+    private var topMenu: some View {
         HStack{
             InfoCard(title: "2048", subTitle: nil)
             Spacer()
-            InfoCard(title: "Score", subTitle: vm.managers.gameEngine.score.formatUsingAbbrevation(), titleFont: .title2)
+            InfoCard(title: "Score", subTitle: vm.score.formatUsingAbbrevation(), titleFont: .title2)
             InfoCard(title: "Best", subTitle: vm.bestScore.formatUsingAbbrevation(), titleFont: .title2)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
     
-    var midMenu: some View {
+    private var midMenu: some View {
         VStack(spacing: 20){
             HStack{
                 Button {
-                    withAnimation(.easeOut) {
-                        vm.resetGame()
-                    }
+                    resetGame()
                 } label: {
                     Text("New Game!")
                         .foregroundColor(Color.theme.textColor)
@@ -88,8 +66,7 @@ struct Home: View {
                 .shadow(radius: 10, x: 5, y: 5)
                 Button {
                     withAnimation(.spring()){
-                        vm.bestScore = 0
-                        vm.managers.gameEngine.bestScore = 0
+                        vm.resetBestScore()
                     }
                 } label: {
                     Image(systemName: "gobackward")
@@ -106,44 +83,30 @@ struct Home: View {
         }
     }
     
-    var botMenu: some View {
+    private var botMenu: some View {
         VStack(spacing: 10.0){
-                Group {
-                    Text("Hight Score!")
-                        .font(.title2.bold())
-                        .foregroundColor(.indigo)
-                    Text("\(vm.bestScore)")
-                        .font(.title.bold())
-                        .foregroundColor(.indigo)
-                        .minimumScaleFactor(0.1)
-                }
-                .padding(.horizontal)
-//                .padding(.bottom)
-                .opacity(vm.bestScore == vm.score && vm.score > 0  ? 1 : 0)
-
-            Stepper("Rank: \(vm.rank)") {
-                if vm.rank < 6 {
-                    vm.rank += 1
-                    vm.resetGame()
-                }
-            } onDecrement: {
-                if vm.rank > 2 {
-                    vm.rank -= 1
-                    vm.resetGame()
-                }
+            Group {
+                Text("Hight Score!")
+                    .font(.title2.bold())
+                    .foregroundColor(.indigo)
+                Text("\(vm.bestScore)")
+                    .font(.title.bold())
+                    .foregroundColor(.indigo)
+                    .minimumScaleFactor(0.1)
             }
-            .foregroundColor( Color.theme.textColor)
-
+            .padding(.horizontal)
+            .opacity(vm.bestScore == vm.score && vm.score > 0  ? 1 : 0)
+            
+            Stepper("Rank \(vm.rank)", value: $rank, in: 2...6, step: 1) { _ in resetGame() }
+                .foregroundColor( Color.theme.textColor)
+            
         }
         .padding()
     }
     
-    var gameOver: some View{
+    private var gameOver: some View{
         ZStack{
-            
-            Color.black.opacity(0.6)
-                .ignoresSafeArea()
-            
+            Color.black.opacity(0.6).ignoresSafeArea()
             VStack(spacing: 20){
                 Text("Game Over")
                     .foregroundColor(Color.red.opacity(0.7))
@@ -160,18 +123,19 @@ struct Home: View {
             .shadow(radius: 10)
         }
         .transition(.opacity)
-        .onTapGesture {
-            withAnimation(.easeInOut) {
-                vm.resetGame()
-            }
+        .onTapGesture { resetGame() }
+    }
+    
+    private func resetGame() {
+        withAnimation(.easeOut(duration: 0.3)) {
+            vm.resetGame(rank: rank)
         }
     }
 }
 
-// MARK: - Preview
-struct Home_Previews: PreviewProvider {
+struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        Home()
-            .environmentObject(GameViewModel(managers: GameManagers()))
+        MainGameView()
+            .environmentObject(GameViewModel())
     }
 }
