@@ -12,12 +12,12 @@
 </p>
 
 <p align="row">
-<img src= "https://github.com/Mutagrey/2048Game/blob/main/screen1.png" width="275" >
-<img src= "https://github.com/Mutagrey/2048Game/blob/main/screen2.png" width="275" >
-<img src= "https://github.com/Mutagrey/2048Game/blob/main/screen3.png" width="275" >
-<img src= "https://github.com/Mutagrey/2048Game/blob/main/screen4.png" width="275" >
-<img src= "https://github.com/Mutagrey/2048Game/blob/main/screen5.png" width="275" >
-<img src= "https://github.com/Mutagrey/2048Game/blob/main/screen6.png" width="275" >
+<img src= "https://github.com/Mutagrey/2048Game/blob/main/screen1.png" width="272" >
+<img src= "https://github.com/Mutagrey/2048Game/blob/main/screen2.png" width="272" >
+<img src= "https://github.com/Mutagrey/2048Game/blob/main/screen3.png" width="272" >
+<img src= "https://github.com/Mutagrey/2048Game/blob/main/screen4.png" width="272" >
+<img src= "https://github.com/Mutagrey/2048Game/blob/main/screen5.png" width="272" >
+<img src= "https://github.com/Mutagrey/2048Game/blob/main/screen6.png" width="272" >
 </p>
 
 ## Features
