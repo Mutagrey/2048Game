@@ -1,5 +1,3 @@
-[![Swift Version][swift-image]][swift-url]
-
 # 2048 Game - Numbers Game
 <br />
 <p align="center">
@@ -7,17 +5,17 @@
     <img src="Icon.jpeg" alt="Logo" width="80" height="80">
   </a>
   <p align="center">
-        Join the numbers and get to the 2048 tile!
+       ## Join the numbers and get to the 2048 tile!
   </p>
 </p>
 
 <p align="row">
-<img src= "https://github.com/Mutagrey/2048Game/blob/main/screen1.png" width="272" >
-<img src= "https://github.com/Mutagrey/2048Game/blob/main/screen2.png" width="272" >
-<img src= "https://github.com/Mutagrey/2048Game/blob/main/screen3.png" width="272" >
-<img src= "https://github.com/Mutagrey/2048Game/blob/main/screen4.png" width="272" >
-<img src= "https://github.com/Mutagrey/2048Game/blob/main/screen5.png" width="272" >
-<img src= "https://github.com/Mutagrey/2048Game/blob/main/screen6.png" width="272" >
+<img src= "https://github.com/Mutagrey/2048Game/blob/main/Screens/screen1.png" width="272" >
+<img src= "https://github.com/Mutagrey/2048Game/blob/main/Screens/screen2.png" width="272" >
+<img src= "https://github.com/Mutagrey/2048Game/blob/main/Screens/screen3.png" width="272" >
+<img src= "https://github.com/Mutagrey/2048Game/blob/main/Screens/screen4.png" width="272" >
+<img src= "https://github.com/Mutagrey/2048Game/blob/main/Screens/screen5.png" width="272" >
+<img src= "https://github.com/Mutagrey/2048Game/blob/main/Screens/screen6.png" width="272" >
 </p>
 
 ## Features
@@ -35,6 +33,3 @@
 Sergey Petrov  – sergreypetrovmtgrey@gmail.com
 
 Free to use.
-
-[swift-image]:https://img.shields.io/badge/swift-5.7-orange.svg
-[swift-url]: https://swift.org/

@@ -70,7 +70,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		41452CFB28CCDBE800290675 = {
+		4143053928F4D2B600FF8A54 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
 				4143052D28F4D02700FF8A54 /* screen1.png */,
@@ -80,6 +80,14 @@
 				4143053428F4D18900FF8A54 /* screen5.png */,
 				4143053528F4D18900FF8A54 /* screen6.png */,
 				4143051F28F4C8B700FF8A54 /* Icon.jpeg */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		41452CFB28CCDBE800290675 = {
+			isa = PBXGroup;
+			children = (
+				4143053928F4D2B600FF8A54 /* Screens */,
 				4143051D28F4C62600FF8A54 /* README.md */,
 				41452D0628CCDBE800290675 /* 2048Game */,
 				41452D0528CCDBE800290675 /* Products */,
