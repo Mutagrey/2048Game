@@ -6,7 +6,7 @@
 [![Platform](https://img.shields.io/cocoapods/p/LFAlertController.svg?style=flat)](http://cocoapods.org/pods/LFAlertController)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
-![Alt text](https://github.com/Mutagrey/2048Game/blob/main/Icon.jpeg) # 2048 Game - Numbers Game
+<img src= "https://github.com/Mutagrey/2048Game/blob/main/Icon.jpeg" width="50" > # 2048 Game - Numbers Game
 <br />
 <p align="center">
   <a href="https://github.com/Mutagrey/2048Game/tree/main">
