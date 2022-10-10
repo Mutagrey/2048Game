@@ -1,11 +1,11 @@
 # 2048 Game - Numbers Game
 <br />
 <p align="center">
-  <a href="https://github.com/Mutagrey/2048Game/blob/main/Icon.jpeg">
+  <a href="https://github.com/Mutagrey/2048Game/blob/main/Screens/Icon.jpeg">
     <img src="Icon.jpeg" alt="Logo" width="80" height="80">
   </a>
   <p align="center">
-       ## Join the numbers and get to the 2048 tile!
+       Join the numbers and get to the 2048 tile!
   </p>
 </p>
 
