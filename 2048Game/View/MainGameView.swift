@@ -90,7 +90,7 @@ struct MainGameView: View {
             .padding(.horizontal)
             .opacity(game.bestScore == game.score && game.score > 0  ? 1 : 0)
             
-            Stepper("Rank \(game.rank)", value: $rank, in: 2...6, step: 1) { _ in resetGame() }
+            Stepper("Rank \(game.rank)", value: $rank, in: 4...6, step: 1) { _ in resetGame() }
                 .foregroundColor( Color.theme.textColor)
         }
         .padding()

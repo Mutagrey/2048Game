@@ -6,7 +6,7 @@
 [![Platform](https://img.shields.io/cocoapods/p/LFAlertController.svg?style=flat)](http://cocoapods.org/pods/LFAlertController)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
-![Alt text](/relative/logo.jpeg?raw=true "Optional Title") # 2048 Game - Numbers Game
+![Alt text](https://github.com/Mutagrey/2048Game/blob/main/Icon.jpeg) # 2048 Game - Numbers Game
 <br />
 <p align="center">
   <a href="https://github.com/Mutagrey/2048Game/tree/main">
@@ -24,28 +24,19 @@
 
 ## Features
 
+- [x] 4x4, 5x5, 6x6 game field
 - [x] Custom Animation
-- [x] 
-- [x] Feature 3
-- [x] Feature 4
-- [x] Feature 5
 
 ## Requirements
 
 - iOS 15.0+
 - Xcode 13.0
 
-## Contribute
-
-We would love you for the contribution to **YourLibraryName**, check the ``LICENSE`` file for more info.
-
 ## Meta
 
-Your Name – [@YourTwitter](https://twitter.com/dbader_org) – YourEmail@example.com
+Sergey Petrov  – sergreypetrovmtgrey@gmail.com
 
-Distributed under the XYZ license. See ``LICENSE`` for more information.
-
-[https://github.com/yourname/github-link](https://github.com/Mutagrey/)
+Free to use.
 
 [swift-image]:https://img.shields.io/badge/swift-3.0-orange.svg
 [swift-url]: https://swift.org/
