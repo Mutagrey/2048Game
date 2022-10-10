@@ -1,6 +1,4 @@
 [![Swift Version][swift-image]][swift-url]
-[![Build Status][travis-image]][travis-url]
-[![License][license-image]][license-url]
 
 # 2048 Game - Numbers Game
 <br />
@@ -36,9 +34,3 @@ Free to use.
 
 [swift-image]:https://img.shields.io/badge/swift-3.0-orange.svg
 [swift-url]: https://swift.org/
-[license-image]:    
-[license-url]: LICENSE
-[travis-image]: https://img.shields.io/travis/dbader/node-datadog-metrics/master.svg?style=flat-square
-[travis-url]: https://travis-ci.org/dbader/node-datadog-metrics
-[codebeat-image]: https://codebeat.co/badges/c19b47ea-2f9d-45df-8458-b2d952fe9dad
-[codebeat-url]: https://codebeat.co/projects/github-com-vsouza-awesomeios-com
