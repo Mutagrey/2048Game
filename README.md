@@ -6,14 +6,14 @@
 [![Platform](https://img.shields.io/cocoapods/p/LFAlertController.svg?style=flat)](http://cocoapods.org/pods/LFAlertController)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
-# Product Name
+# 2048 Game - Numbers Game
 <br />
 <p align="center">
   <a href="https://github.com/alexanderritik/Best-README-Template">
     <img src="logo.jpeg" alt="Logo" width="80" height="80">
   </a>
   <p align="center">
-    One to two paragraph statement about your product and what it does.
+        Join the numbers and get to the 2048 tile!
   </p>
 </p>
 
@@ -24,8 +24,8 @@
 
 ## Features
 
-- [x] Feature 1
-- [x] Feature 2
+- [x] Custom Animation
+- [x] 
 - [x] Feature 3
 - [x] Feature 4
 - [x] Feature 5
