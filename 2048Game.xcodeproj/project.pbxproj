@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4143051E28F4C62600FF8A54 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4143051D28F4C62600FF8A54 /* README.md */; };
 		41452D0828CCDBE800290675 /* NumbersGameApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41452D0728CCDBE800290675 /* NumbersGameApp.swift */; };
 		41452D0A28CCDBE800290675 /* MainGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41452D0928CCDBE800290675 /* MainGameView.swift */; };
 		41452D0C28CCDBE900290675 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41452D0B28CCDBE900290675 /* Assets.xcassets */; };
@@ -18,7 +19,6 @@
 		418A073128D8DD90003C92FF /* GameGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418A073028D8DD90003C92FF /* GameGridView.swift */; };
 		418A073728DA2169003C92FF /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418A073628DA2169003C92FF /* GameViewModel.swift */; };
 		418A073928DA52AD003C92FF /* GameDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418A073828DA52AD003C92FF /* GameDataManager.swift */; };
-		418A075E28DF0C07003C92FF /* README.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 418A075D28DF0C07003C92FF /* README.rtf */; };
 		41C3627B28CCE69F0040804B /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3627A28CCE69F0040804B /* CellView.swift */; };
 		41CCCB6C28D1453E0081AF19 /* LocalFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CCCB6B28D1453E0081AF19 /* LocalFileManager.swift */; };
 		41DA333528F262890069CA80 /* InfoCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DA333428F262890069CA80 /* InfoCard.swift */; };
@@ -26,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4143051D28F4C62600FF8A54 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		41452D0428CCDBE800290675 /* 2048Game.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 2048Game.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		41452D0728CCDBE800290675 /* NumbersGameApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumbersGameApp.swift; sourceTree = "<group>"; };
 		41452D0928CCDBE800290675 /* MainGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainGameView.swift; sourceTree = "<group>"; };
@@ -38,7 +39,6 @@
 		418A073028D8DD90003C92FF /* GameGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameGridView.swift; sourceTree = "<group>"; };
 		418A073628DA2169003C92FF /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
 		418A073828DA52AD003C92FF /* GameDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDataManager.swift; sourceTree = "<group>"; };
-		418A075D28DF0C07003C92FF /* README.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = README.rtf; sourceTree = "<group>"; };
 		41C3627A28CCE69F0040804B /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
 		41CCCB6B28D1453E0081AF19 /* LocalFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalFileManager.swift; sourceTree = "<group>"; };
 		41DA333428F262890069CA80 /* InfoCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoCard.swift; sourceTree = "<group>"; };
@@ -59,6 +59,7 @@
 		41452CFB28CCDBE800290675 = {
 			isa = PBXGroup;
 			children = (
+				4143051D28F4C62600FF8A54 /* README.md */,
 				41452D0628CCDBE800290675 /* 2048Game */,
 				41452D0528CCDBE800290675 /* Products */,
 			);
@@ -83,7 +84,6 @@
 				41452D0728CCDBE800290675 /* NumbersGameApp.swift */,
 				41452D0B28CCDBE900290675 /* Assets.xcassets */,
 				41452D0D28CCDBE900290675 /* Preview Content */,
-				418A075D28DF0C07003C92FF /* README.rtf */,
 			);
 			path = 2048Game;
 			sourceTree = "<group>";
@@ -202,7 +202,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				41452D0F28CCDBE900290675 /* Preview Assets.xcassets in Resources */,
-				418A075E28DF0C07003C92FF /* README.rtf in Resources */,
+				4143051E28F4C62600FF8A54 /* README.md in Resources */,
 				41452D0C28CCDBE900290675 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
