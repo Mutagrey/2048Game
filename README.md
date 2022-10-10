@@ -32,5 +32,5 @@ Sergey Petrov  – sergreypetrovmtgrey@gmail.com
 
 Free to use.
 
-[swift-image]:https://img.shields.io/badge/swift-3.0-orange.svg
+[swift-image]:https://img.shields.io/badge/swift-5.7-orange.svg
 [swift-url]: https://swift.org/
