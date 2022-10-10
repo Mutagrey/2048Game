@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		4143051E28F4C62600FF8A54 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4143051D28F4C62600FF8A54 /* README.md */; };
 		4143052028F4C8B700FF8A54 /* Icon.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 4143051F28F4C8B700FF8A54 /* Icon.jpeg */; };
+		4143052428F4CE5200FF8A54 /* screen1.png in Resources */ = {isa = PBXBuildFile; fileRef = 4143052128F4CE5200FF8A54 /* screen1.png */; };
+		4143052528F4CE5200FF8A54 /* screen3.png in Resources */ = {isa = PBXBuildFile; fileRef = 4143052228F4CE5200FF8A54 /* screen3.png */; };
+		4143052628F4CE5200FF8A54 /* screen2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4143052328F4CE5200FF8A54 /* screen2.png */; };
 		41452D0828CCDBE800290675 /* NumbersGameApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41452D0728CCDBE800290675 /* NumbersGameApp.swift */; };
 		41452D0A28CCDBE800290675 /* MainGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41452D0928CCDBE800290675 /* MainGameView.swift */; };
 		41452D0C28CCDBE900290675 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41452D0B28CCDBE900290675 /* Assets.xcassets */; };
@@ -29,6 +32,9 @@
 /* Begin PBXFileReference section */
 		4143051D28F4C62600FF8A54 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4143051F28F4C8B700FF8A54 /* Icon.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Icon.jpeg; sourceTree = "<group>"; };
+		4143052128F4CE5200FF8A54 /* screen1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = screen1.png; path = ../../../Desktop/screen1.png; sourceTree = "<group>"; };
+		4143052228F4CE5200FF8A54 /* screen3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = screen3.png; path = ../../../Desktop/screen3.png; sourceTree = "<group>"; };
+		4143052328F4CE5200FF8A54 /* screen2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = screen2.png; path = ../../../Desktop/screen2.png; sourceTree = "<group>"; };
 		41452D0428CCDBE800290675 /* 2048Game.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 2048Game.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		41452D0728CCDBE800290675 /* NumbersGameApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumbersGameApp.swift; sourceTree = "<group>"; };
 		41452D0928CCDBE800290675 /* MainGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainGameView.swift; sourceTree = "<group>"; };
@@ -61,6 +67,9 @@
 		41452CFB28CCDBE800290675 = {
 			isa = PBXGroup;
 			children = (
+				4143052128F4CE5200FF8A54 /* screen1.png */,
+				4143052328F4CE5200FF8A54 /* screen2.png */,
+				4143052228F4CE5200FF8A54 /* screen3.png */,
 				4143051F28F4C8B700FF8A54 /* Icon.jpeg */,
 				4143051D28F4C62600FF8A54 /* README.md */,
 				41452D0628CCDBE800290675 /* 2048Game */,
@@ -207,7 +216,10 @@
 				41452D0F28CCDBE900290675 /* Preview Assets.xcassets in Resources */,
 				4143051E28F4C62600FF8A54 /* README.md in Resources */,
 				4143052028F4C8B700FF8A54 /* Icon.jpeg in Resources */,
+				4143052528F4CE5200FF8A54 /* screen3.png in Resources */,
+				4143052428F4CE5200FF8A54 /* screen1.png in Resources */,
 				41452D0C28CCDBE900290675 /* Assets.xcassets in Resources */,
+				4143052628F4CE5200FF8A54 /* screen2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
