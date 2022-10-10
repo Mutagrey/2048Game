@@ -10,13 +10,13 @@ import SwiftUI
 @main
 struct NumbersGameApp: App {
     
-    @StateObject var vm = GameViewModel()
+    @StateObject var game = GameViewModel()
     
     var body: some Scene {
         WindowGroup {
             MainGameView()
                 .preferredColorScheme(.light)
-                .environmentObject(vm)
+                .environmentObject(game)
         }
     }
 }

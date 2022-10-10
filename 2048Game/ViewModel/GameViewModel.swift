@@ -19,6 +19,7 @@ class GameViewModel: ObservableObject {
     var bestMoves: Int { game.bestMoves }
     var isGameOver: Bool { game.isGameOver }
     var rank: Int { game.rank }
+    var lastMove: GameEngine.Direction? { game.lastMove }
     
     private var cancelables = Set<AnyCancellable>()
     private let dataStore = GameDataManager()

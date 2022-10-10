@@ -40,6 +40,16 @@ extension Int {
 
         return numFormatter.string(from: NSNumber(value:value)) ?? "-"
     }
+    
+    var stringNumber: String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 2
+        formatter.decimalSeparator = "."
+        formatter.groupingSeparator = ""
+        return formatter.string(from: NSNumber(value: self)) ?? "-"
+    }
+    
 }
 
 

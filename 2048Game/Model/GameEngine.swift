@@ -9,7 +9,7 @@ import SwiftUI
 
 struct GameEngine: Codable {
 
-    private static let startNumbers = [2, 2, 4]
+    private static let startNumbers = [2, 2, 2, 4]
     
     private(set) var cells: [Cell] = []
     private(set) var moves: Int = 0
@@ -18,8 +18,9 @@ struct GameEngine: Codable {
     private(set) var bestMoves: Int = 0
     private(set) var rank: Int = 4
     private(set) var isGameOver: Bool = false
+    private(set) var lastMove: Direction?
     
-    enum Direction {
+    enum Direction: String, Codable {
         case up
         case down
         case left
@@ -52,6 +53,7 @@ struct GameEngine: Codable {
 
     /// Move Cell to Direction
     mutating func moveCell(to move: Direction) {
+        self.lastMove = move
         let isSorted = self.sortCells(to: move)
         let isSum = self.sumCells(to: move)
         if isSorted || isSum {
@@ -181,15 +183,5 @@ struct GameEngine: Codable {
             }
         }
         return isSum
-    }
-
-    /// Get Row by Cells Index
-    private func getRow(index: Int) -> Int {
-        return Int(Double(index) / Double(rank))
-    }
-    
-    /// Get Column by Cells Index
-    private func getColumn(index: Int) -> Int {
-        return index % rank
     }
 }

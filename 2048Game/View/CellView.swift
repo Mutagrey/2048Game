@@ -8,21 +8,29 @@
 import SwiftUI
 
 struct CellView: View, Animatable {
-
     var cell: Cell
-    var rotation: Double
+    var lastMove: GameEngine.Direction?
+    private var rotation: Double
     
-    init(cell: Cell) {
+    init(cell: Cell, lastMove: GameEngine.Direction?) {
         self.cell = cell
-        self.rotation = cell.animate ? 180 : 0
+        self.lastMove = lastMove
+        var maxRotation: Double = 0
+        switch lastMove {
+        case .up, .left: maxRotation = -CellViewConstants.maxDegrees
+        case .down, .right: maxRotation = CellViewConstants.maxDegrees
+        case .none: maxRotation = 0
+        }
+        self.rotation = cell.animate ? maxRotation : 0
     }
     
     var animatableData: Double {
         get { rotation }
         set { rotation = newValue }
     }
-
+    
     private struct CellViewConstants {
+        static let maxDegrees: Double = 25
         static let cornerRadius: CGFloat = 5
         static let lineWidth: CGFloat = 1
         static let shadowRadius: CGFloat = 10
@@ -35,41 +43,34 @@ struct CellView: View, Animatable {
             .white.opacity(0.05),
             .clear
         ], startPoint: .topLeading, endPoint: .bottomTrailing)
-        
-        static let animationDuration: CGFloat = 3
     }
     
     var body: some View {
         let shape = RoundedRectangle(cornerRadius: CellViewConstants.cornerRadius, style: .continuous)
         ZStack{
             // GlassMorphic Card
-            shape.fill(CellViewConstants.glassMorphicStyle)
-                .blur(radius: 5)
+            shape.fill(CellViewConstants.glassMorphicStyle).blur(radius: 5)
             // Borders
-            shape.stroke(CellViewConstants.strokeShapeStyle, lineWidth: CellViewConstants.lineWidth)
-                .shadow(radius: CellViewConstants.shadowRadius)
+            shape.stroke(CellViewConstants.strokeShapeStyle, lineWidth: CellViewConstants.lineWidth).shadow(radius: CellViewConstants.shadowRadius)
             // MARK: Content
-//            if animate {
-                Text("\(cell.stringNumber)")
-                    .font(.system(size: 30, weight: .bold, design: .monospaced))
-                    .minimumScaleFactor(0.01)
-                    .lineLimit(1)
-                    .foregroundColor(cell.number > 4 ? Color.white : Color.theme.textColor)
-                    .shadow(color: .black.opacity(0.2), radius: 5, x: 5, y: 5)
-                    .opacity(rotation > 90 ? 0 : 1)
-//            }
-
+            Text("\(cell.number.stringNumber)")
+                .font(.system(size: 30, weight: .bold, design: .rounded))
+                .minimumScaleFactor(0.01)
+                .lineLimit(1)
+                .foregroundColor(cell.number > 4 ? Color.white : Color.theme.textColor)
+                .shadow(color: .black.opacity(0.2), radius: 5, x: 5, y: 5)
+                .opacity(abs(rotation) > 90 ? 0 : 1)
         }
         .background(Color.cellColor(number: cell.number), in: shape)
-        .rotation3DEffect(Angle(degrees: rotation), axis: (x: 0, y: 1, z: 0))
-//        .animation(.easeIn(duration: 3), value: UUID())
+        .rotation3DEffect(Angle(degrees: rotation),
+                          axis: ((lastMove == .up || lastMove == .down) ? 1 : 0, (lastMove == .left || lastMove == .right) ? 1 : 0, 0))
     }
     
 }
 
 struct CellView_Previews: PreviewProvider {
     static var previews: some View {
-        CellView(cell: .init(number: 4))
+        CellView(cell: .init(number: 4), lastMove: .left)
             .environmentObject(GameViewModel())
     }
 }

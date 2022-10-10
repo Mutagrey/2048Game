@@ -11,10 +11,12 @@ struct GameGridView: View {
     @EnvironmentObject var game: GameViewModel
     @State private var cellsSet = Set<String>()
     @State private var isMoving = false
+    @State private var moveDirection: GameEngine.Direction?
+    @AppStorage("rank") private var rank: Int = 4
     
     private struct GameConstants {
         static let animationDuration: CGFloat = 0.15
-        static let totalAnimationDuration: CGFloat = 3
+        static let totalAnimationDuration: CGFloat = 1
         static let distanceSence: CGFloat = 50
         static let cornerRadius: CGFloat = 5
         static let cellPadding: CGFloat = 4
@@ -60,12 +62,15 @@ struct GameGridView: View {
             if isUnDealt(cell) || cell.number == 0 {
                 Color.clear
             } else {
-                CellView(cell: cell)
+                CellView(cell: cell, lastMove: moveDirection)
                     .padding(GameConstants.cellPadding)
-                    .transition(.asymmetric(insertion: .scale, removal: .scale).animation(.easeOut(duration: GameConstants.animationDuration)))
+                    .transition(.scale.animation(.easeOut(duration: GameConstants.animationDuration)))
             }
         }
         .padding(GameConstants.cellPadding)
+        .onAppear{
+            game.resetGame(rank: rank)
+        }
         .onChange(of: game.cells){ newValue in
             for cell in game.cells {
                 withAnimation(animationDeal(cell)) {
@@ -83,22 +88,26 @@ struct GameGridView: View {
         if abs(dx) > abs(dy) {
             if dx < -GameConstants.distanceSence && !isMoving {
                 isMoving = true
+                moveDirection = .left
                 game.moveCell(to: .left)
                 return
             }
             if dx > GameConstants.distanceSence && !isMoving {
                 isMoving = true
+                moveDirection = .right
                 game.moveCell(to: .right)
                 return
             }
         } else {
             if dy < -GameConstants.distanceSence && !isMoving {
                 isMoving = true
+                moveDirection = .up
                 game.moveCell(to: .up)
                 return
             }
             if dy > GameConstants.distanceSence && !isMoving {
                 isMoving = true
+                moveDirection = .down
                 game.moveCell(to: .down)
                 return
             }
@@ -107,13 +116,8 @@ struct GameGridView: View {
     
     // MARK: - Animation
     private func animateCell(_ cell: Cell) {
-        withAnimation(.spring(response: GameConstants.animationDuration + 0.1, dampingFraction: GameConstants.animationDuration + 0.2, blendDuration: GameConstants.animationDuration + 0.2).repeatCount(1, autoreverses: false)) {
-        if cell.animate {
-            DispatchQueue.main.asyncAfter(deadline: .now() + GameConstants.animationDuration * 1 + 0.01) {
-                
-                    self.game.animateCell(cell)
-                }
-            }
+        withAnimation(.easeInOut(duration: GameConstants.animationDuration * 2)) {
+            if cell.animate { self.game.animateCell(cell) }
         }
     }
     

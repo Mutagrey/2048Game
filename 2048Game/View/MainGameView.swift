@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MainGameView: View {
-    @EnvironmentObject var vm: GameViewModel
+    @EnvironmentObject var game: GameViewModel
     @Environment(\.scenePhase) var scenePhase
     @AppStorage("rank") private var rank: Int = 4
     
@@ -18,23 +18,17 @@ struct MainGameView: View {
             midMenu
             GameGridView()
             Spacer(minLength: 0)
-            Spacer()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding()
-        .blur(radius: vm.isGameOver ? 10 : 0)
-        .animation(.easeInOut, value: vm.isGameOver)
-        .overlay(alignment: .bottom){
-            botMenu
-        }
-        .background{
-            Color.theme.backgroundGradient
-                .ignoresSafeArea()
-        }
-        .overlay { if vm.isGameOver { gameOver } }
+        .blur(radius: game.isGameOver ? 10 : 0)
+        .animation(.easeInOut, value: game.isGameOver)
+        .overlay(alignment: .bottom){ botMenu }
+        .background{ Color.theme.backgroundGradient.ignoresSafeArea() }
+        .overlay { if game.isGameOver { gameOver } }
         .onChange(of: scenePhase) { newValue in
             if newValue == .background || newValue == .inactive {
-                vm.saveCells()
+                game.saveCells()
             }
         }
     }
@@ -43,8 +37,8 @@ struct MainGameView: View {
         HStack{
             InfoCard(title: "2048", subTitle: nil)
             Spacer()
-            InfoCard(title: "Score", subTitle: vm.score.formatUsingAbbrevation(), titleFont: .title2)
-            InfoCard(title: "Best", subTitle: vm.bestScore.formatUsingAbbrevation(), titleFont: .title2)
+            InfoCard(title: "Score", subTitle: game.score.formatUsingAbbrevation(), titleFont: .title2)
+            InfoCard(title: "Best", subTitle: game.bestScore.formatUsingAbbrevation(), titleFont: .title2)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
@@ -61,26 +55,25 @@ struct MainGameView: View {
                         .frame(maxWidth: .infinity)
                         .padding(5)
                 }
-                .buttonStyle(.borderedProminent)
-                .accentColor(Color.theme.accentColor)
-                .shadow(radius: 10, x: 5, y: 5)
+                .shadow(color: .black.opacity(0.15), radius: 10, x: 5, y: 5)
                 Button {
                     withAnimation(.spring()){
-                        vm.resetBestScore()
+                        game.resetBestScore()
                     }
                 } label: {
                     Image(systemName: "gobackward")
                         .foregroundColor(Color.theme.textColor)
                         .padding(5)
                 }
-                .buttonStyle(.borderedProminent)
-                .accentColor(Color.theme.accentColor)
-                .shadow(radius: 10, x: 5, y: 5)
+                .shadow(color: .black.opacity(0.15), radius: 10, x: 5, y: 5)
             }
+            .buttonStyle(.borderedProminent)
+            .accentColor(Color.theme.accentColor)
             Text("Join the numbers and get to the 2048 tile!")
                 .foregroundColor(Color.theme.textColor)
                 .font(.headline)
         }
+        .transaction( { $0.animation = nil })
     }
     
     private var botMenu: some View {
@@ -89,17 +82,16 @@ struct MainGameView: View {
                 Text("Hight Score!")
                     .font(.title2.bold())
                     .foregroundColor(.indigo)
-                Text("\(vm.bestScore)")
+                Text("\(game.bestScore)")
                     .font(.title.bold())
                     .foregroundColor(.indigo)
                     .minimumScaleFactor(0.1)
             }
             .padding(.horizontal)
-            .opacity(vm.bestScore == vm.score && vm.score > 0  ? 1 : 0)
+            .opacity(game.bestScore == game.score && game.score > 0  ? 1 : 0)
             
-            Stepper("Rank \(vm.rank)", value: $rank, in: 2...6, step: 1) { _ in resetGame() }
+            Stepper("Rank \(game.rank)", value: $rank, in: 2...6, step: 1) { _ in resetGame() }
                 .foregroundColor( Color.theme.textColor)
-            
         }
         .padding()
     }
@@ -114,7 +106,7 @@ struct MainGameView: View {
                 Text("Score")
                     .font(.title2.bold())
                     .foregroundColor(Color.white.opacity(0.7))
-                Text("\(vm.score)")
+                Text("\(game.score)")
                     .font(.title.bold())
                     .foregroundColor(.indigo)
             }
@@ -127,9 +119,7 @@ struct MainGameView: View {
     }
     
     private func resetGame() {
-        withAnimation(.easeOut(duration: 0.3)) {
-            vm.resetGame(rank: rank)
-        }
+        game.resetGame(rank: rank)
     }
 }
 
