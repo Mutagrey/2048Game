@@ -149,9 +149,7 @@ struct GameEngine: Codable {
                 } else {
                     let newPos = getPosition(to: move, row: row, column: column, offset: zeroCount)
                     if newPos >= 0 && newPos < rank*rank && newPos != curPos {
-                        let tempCell = cells[newPos]
-                        cells[newPos] = cells[curPos]
-                        cells[curPos] = tempCell
+                        swapCells(cells[curPos], cells[newPos])
                         isSorted = true
                     }
                 }
@@ -171,8 +169,9 @@ struct GameEngine: Codable {
                 
                 if cells[nextPos].number == cells[curPos].number && cells[curPos].number > 0 && curPos != nextPos {
                     isSum = true
-                    cells[nextPos].number *= 2
-                    cells[curPos].number = 0
+                    cells[curPos].number *= 2
+                    cells[nextPos].number = 0
+                    swapCells(cells[curPos], cells[nextPos])
                     score += cells.reduce(0) { $0 + $1.number }
                     if score > bestScore {
                         bestScore = score
@@ -183,5 +182,15 @@ struct GameEngine: Codable {
             }
         }
         return isSum
+    }
+    
+    private mutating func swapCells(_ cell1: Cell, _ cell2: Cell) {
+        guard
+            let index1 = cells.firstIndex(of: cell1),
+            let index2 = cells.firstIndex(of: cell2)
+        else { return }
+        let tempCell = cells[index1]
+        cells[index1] = cells[index2]
+        cells[index2] = tempCell
     }
 }

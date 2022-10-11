@@ -60,6 +60,8 @@ struct CellView: View, Animatable {
                 .foregroundColor(cell.number > 4 ? Color.white : Color.theme.textColor)
                 .shadow(color: .black.opacity(0.2), radius: 5, x: 5, y: 5)
                 .opacity(abs(rotation) > 90 ? 0 : 1)
+                .transition(.opacity)
+                .id("Number\(cell.number)")
         }
         .background(Color.cellColor(number: cell.number), in: shape)
         .rotation3DEffect(Angle(degrees: rotation),

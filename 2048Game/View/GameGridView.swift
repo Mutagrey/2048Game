@@ -15,7 +15,7 @@ struct GameGridView: View {
     @AppStorage("rank") private var rank: Int = 4
     
     private struct GameConstants {
-        static let animationDuration: CGFloat = 0.15
+        static let animationDuration: CGFloat = 0.2 //* 2
         static let totalAnimationDuration: CGFloat = 1
         static let distanceSence: CGFloat = 50
         static let cornerRadius: CGFloat = 5
@@ -39,7 +39,7 @@ struct GameGridView: View {
                     }
                 }
                 .onEnded{ _ in
-                    self.isMoving = false
+                        self.isMoving = false
                 }
         )
     }
@@ -64,7 +64,9 @@ struct GameGridView: View {
             } else {
                 CellView(cell: cell, lastMove: moveDirection)
                     .padding(GameConstants.cellPadding)
-                    .transition(.scale.animation(.easeOut(duration: GameConstants.animationDuration)))
+                    .transition(.asymmetric(insertion: .scale.animation(.easeOut(duration: GameConstants.animationDuration).delay(GameConstants.animationDuration )),
+                                            removal:   .scale.animation(.easeOut(duration: GameConstants.animationDuration))))
+
             }
         }
         .padding(GameConstants.cellPadding)
