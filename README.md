@@ -2,7 +2,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/Mutagrey/2048Game/blob/main/Screens/Icon.jpeg">
-    <img src="/Screens/Icon.jpeg" alt="Logo" width="80" height="80" style="border-radius: 14px">
+    <img src="/Screens/Icon.jpeg" alt="Logo" width="80" height="80" style="border-radius: 50px">
   </a>
   <p align="center">
        Join the numbers and get to the 2048 tile!
